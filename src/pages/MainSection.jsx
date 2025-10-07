@@ -18,7 +18,7 @@ function MainSection() {
     <main className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-100 py-12">
       <section className="max-w-7xl mx-auto px-5">
        
-        <h2 className="text-center text-4xl font-extrabold text-blue-800 mb-12 tracking-tight drop-shadow-sm">
+        <h2 className="text-center text-4xl font-extrabold text-amber-800 mb-12 tracking-tight drop-shadow-sm">
          Products
         </h2>
 
@@ -41,10 +41,10 @@ function MainSection() {
 
               
               <div className="p-5 text-center">
-                <h3 className="text-gray-800 font-semibold text-base mb-2 h-12 overflow-hidden group-hover:text-blue-700 transition-colors duration-300">
+                <h3 className="text-gray-800 font-semibold text-base mb-2 h-12 overflow-hidden group-hover:text-amber-700 transition-colors duration-300">
                   {obj.title}
                 </h3>
-                <p className="text-blue-700 font-bold text-lg group-hover:text-blue-900">
+                <p className="text-amber-700 font-bold text-lg group-hover:text-amber-900">
                   ₹{obj.price}
                 </p>
               </div>
