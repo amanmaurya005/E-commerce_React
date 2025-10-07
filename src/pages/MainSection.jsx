@@ -45,7 +45,7 @@ function MainSection() {
                   {obj.title}
                 </h3>
                 <p className="text-amber-700 font-bold text-lg group-hover:text-amber-900">
-                  ₹{obj.price}
+                  ${obj.price}
                 </p>
               </div>
             </Link>
