@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FaShoppingCart } from "react-icons/fa";
 import { FiLogIn } from "react-icons/fi";
-import {Link} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Header() {
 
@@ -19,9 +19,43 @@ function Header() {
                 <div className="leftside flex items-center justify-between w-1/2">
                     <div className="menus w-2/3">
                         <ul className='flex items-center justify-around w-full'>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="about">About</Link></li>
-                            <li><Link to="contact">Contact</Link></li>
+                            <li><NavLink
+                                to="/"
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? "text-amber-500 font-semibold border-b-2 border-amber-600 pb-1"
+                                        : "text-gray-700 hover:text-amber-500 transition"
+                                }
+                            >
+                                Home
+                            </NavLink>
+                            </li>
+
+                            <li>
+                                <NavLink
+                                    to="/about"
+                                    className={({ isActive }) =>
+                                        isActive
+                                            ? "text-amber-500 font-semibold border-b-2 border-amber-600 pb-1"
+                                        : "text-gray-700 hover:text-amber-500 transition"
+                                    }
+                                >
+                                    About
+                                </NavLink>
+                            </li>
+
+                            <li>
+                                <NavLink
+                                    to="/contact"
+                                    className={({ isActive }) =>
+                                        isActive
+                                           ? "text-amber-500 font-semibold border-b-2 border-amber-600 pb-1"
+                                        : "text-gray-700 hover:text-amber-500 transition"
+                                    }
+                                >
+                                    Contact
+                                </NavLink>
+                            </li>
                         </ul>
                     </div>
                     <div className="info w-1/6">

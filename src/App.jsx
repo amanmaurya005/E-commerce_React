@@ -6,6 +6,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import Aman from './components/Aman'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import FoundNot from "./pages/FoundNot"
 
 
 const router = createBrowserRouter([
@@ -25,8 +26,16 @@ const router = createBrowserRouter([
             {
                 path: "contact",
                 element: <Contact />
+            },
+             {
+                path: "*",
+                element: <FoundNot />
             }
-        ]
+         
+
+        ],
+          
+
     }
 ])
 
