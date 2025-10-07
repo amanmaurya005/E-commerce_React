@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
+import { Link } from 'react-router-dom';
 
 
 
@@ -27,24 +28,29 @@ export default function MainSection() {
   </h2>
 
   <div className="products-wrapper flex flex-wrap justify-center gap-6">
-    {products.map((obj) => {
-      return (
-        <div
-          className="product w-full sm:w-[47%] md:w-[30%] lg:w-[23%] bg-white p-4 rounded-2xl 
-                     shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 text-center"
-        >
-          <img
-            src={obj.image}
-            alt=""
-            className="w-full h-56 object-contain rounded-xl mb-3"
-          />
-          <h3 className="text-base font-medium text-gray-700 mb-1 truncate">
-            {obj.title}
-          </h3>
-          <p className="text-lg font-semibold text-emerald-600">${obj.price}</p>
-        </div>
-      );
-    })}
+   {products.map((obj) => {
+  return (
+    <Link to={"/product/" + obj.id} key={obj.id}>
+      <div
+        className="product  bg-white p-4 rounded-2xl 
+                   shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 text-center"
+      >
+        <img
+          src={obj.image}
+          alt=""
+          className="w-full h-56 object-contain rounded-xl mb-3"
+        />
+        <h3 className="text-base font-medium text-gray-700 mb-1 truncate">
+          {obj.title}
+        </h3>
+        <p className="text-lg font-semibold text-emerald-600">
+          ${obj.price}
+        </p>
+      </div>
+    </Link>
+  );
+})}
+
   </div>
 </div>
 
