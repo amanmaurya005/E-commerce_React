@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 function MainSection() {
@@ -25,9 +24,9 @@ function MainSection() {
        
         <div className="flex flex-wrap justify-center gap-8">
           {products.map((obj) => (
-            <Link
+            <div
               key={obj.id}
-              to={"/product/" + obj.id}
+              onClick={()=>(window.location.href = "/product/" + obj.id)}
               className="group w-72 bg-white rounded-3xl shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-blue-100 overflow-hidden"
             >
               
@@ -48,7 +47,7 @@ function MainSection() {
                   ${obj.price}
                 </p>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </section>
@@ -57,6 +56,45 @@ function MainSection() {
 }
 
 export default MainSection;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

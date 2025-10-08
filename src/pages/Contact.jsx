@@ -17,30 +17,30 @@ export default function Contact() {
             <input
               type="text"
               placeholder="Your Name"
-              className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-amber-500"
             />
             <input
               type="email"
               placeholder="Your Email"
-              className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-amber-500"
             />
           </div>
 
           <input
             type="text"
             placeholder="Subject"
-            className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-amber-500"
           />
 
           <textarea
             rows="5"
             placeholder="Your Message"
-            className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
+            className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-amber-500 resize-none"
           ></textarea>
 
           <button
             type="submit"
-            className="bg-emerald-600 text-white py-3 px-6 rounded-full w-fit mx-auto hover:bg-emerald-700 transition-all duration-300"
+            className="bg-amber-600 text-white py-3 px-6 rounded-full w-fit mx-auto hover:bg-amber-700 transition-all duration-300"
           >
             Send Message
           </button>

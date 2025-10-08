@@ -5,10 +5,29 @@ import axios from "axios";
 export default function SingleProduct() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+   const [notFound, setNotFound] = useState(false);
 
-  useEffect(() => {
-    axios.get(`https://fakestoreapi.com/products/${id}`).then((res) => setProduct(res.data));
-  }, [id]);
+ useEffect(() => {
+  fetchProduct();
+}, [id]);
+
+async function fetchProduct() {
+  const response = await axios.get("https://fakestoreapi.com/products/" + id);
+ if (response.data && response.data.id) {
+      setProduct(response.data);
+      setNotFound(false);
+    } else {
+      setNotFound(true);
+    }
+}
+
+
+  if(notFound)
+      return(
+       <div className="flex items-center justify-center h-screen bg-gradient-to-b from-gray-100 to-gray-200">
+        <p className="text-gray-600 text-xl animate-pulse">product not Found</p>
+      </div>
+    )
 
   if (!product)
     return (
@@ -34,7 +53,7 @@ export default function SingleProduct() {
           <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
             {product.title}
           </h1>
-          <p className="text-emerald-600 text-2xl font-semibold mb-6">
+          <p className="text-amber-600 text-2xl font-semibold mb-6">
             ${product.price}
           </p>
           <p className="text-gray-700 leading-relaxed mb-8">
@@ -42,7 +61,7 @@ export default function SingleProduct() {
           </p>
 
          
-          <span className="inline-block bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-sm font-medium mb-6 capitalize">
+          <span className="inline-block bg-emerald-100 text-amber-700 px-4 py-1 rounded-full text-sm font-medium mb-6 capitalize">
             {product.category}
           </span>
 
@@ -53,7 +72,7 @@ export default function SingleProduct() {
               to="/"
               className="bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-semibold shadow-sm hover:bg-gray-300 transition-all duration-300"
             >
-              Back to Products
+              Back to Products          
             </Link>
           </div>
         </div>
