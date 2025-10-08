@@ -1,161 +1,67 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-function MainSection() {
+export default function MainSection() {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
   async function fetchProducts() {
-    const response = await axios.get("https://fakestoreapi.com/products");
-    setProducts(response.data);
+    setLoading(true);
+    const productRes = await axios.get("https://fakestoreapi.com/products");
+    const rateRes = await axios.get(
+      "https://api.exchangerate.host/latest?base=USD&symbols=INR"
+    );
+    const rate = rateRes.data?.rates?.INR || 88;
+
+    const convertedProducts = productRes.data.map((item) => ({
+      ...item,
+      priceINR: (item.price * rate).toFixed(2),
+    }));
+
+    setProducts(convertedProducts);
+    setLoading(false);
+  }
+
+  if (loading) {
+    return (
+      <div className="text-center p-10 text-xl font-semibold text-gray-500">
+        Loading products...
+      </div>
+    );
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-100 py-12">
-      <section className="max-w-7xl mx-auto px-5">
-       
-        <h2 className="text-center text-4xl font-extrabold text-amber-800 mb-12 tracking-tight drop-shadow-sm">
-         Products
+    <main className="bg-gray-50 py-10">
+      <div className="max-w-7xl mx-auto px-4">
+        <h2 className="text-center text-3xl font-bold text-gray-800 mb-10">
+          Products
         </h2>
 
-       
-        <div className="flex flex-wrap justify-center gap-8">
+        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {products.map((obj) => (
-            <div
-              key={obj.id}
-              onClick={()=>(window.location.href = "/product/" + obj.id)}
-              className="group w-72 bg-white rounded-3xl shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-blue-100 overflow-hidden"
-            >
-              
-              <div className="bg-gradient-to-t from-blue-50 to-white flex justify-center items-center h-64 p-6">
+            <Link to={"/product/" + obj.id} key={obj.id}>
+              <div className= "h-full bg-white p-6 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center">
                 <img
                   src={obj.image}
                   alt={obj.title}
-                  className="h-full w-auto object-contain transition-transform duration-300 group-hover:scale-110"
+                  className="w-full h-56 object-contain rounded-lg mb-4 bg-gray-100"
                 />
-              </div>
-
-              
-              <div className="p-5 text-center">
-                <h3 className="text-gray-800 font-semibold text-base mb-2 h-12 overflow-hidden group-hover:text-amber-700 transition-colors duration-300">
+                <h3 className="text-base font-medium text-gray-700 mb-2 text-center line-clamp-2">
                   {obj.title}
                 </h3>
-                <p className="text-amber-700 font-bold text-lg group-hover:text-amber-900">
-                  ${obj.price}
+                <p className="text-lg font-semibold text-amber-500">
+                  ₹{obj.priceINR}
                 </p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
-      </section>
+      </div>
     </main>
   );
 }
-
-export default MainSection;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { useEffect, useState } from 'react'
-// import axios from "axios"
-// import { Link } from 'react-router-dom';
-
-
-
-
-// export default function MainSection() {
-
-//     const [products, setProducts] = useState([]);
-
-//     useEffect(() => {
-//         fetchProducts()
-//     }, [])
-
-//     async function fetchProducts() {
-//         const response = await axios.get("https://fakestoreapi.com/products");
-//         setProducts(response.data)
-//     }
-//     console.log(products);
-
-//     return (
-//         <>
-//             <main>
-//                <div className="products p-6 bg-gray-50">
-//   <h2 className="text-center text-3xl font-semibold text-gray-800 mb-10">
-//     Products
-//   </h2>
-
-//   <div className="products-wrapper flex flex-wrap justify-center gap-6">
-//    {products.map((obj) => {
-//   return (
-//     <Link to={"/product/" + obj.id} key={obj.id}>
-//       <div
-//         className="product  bg-white p-4 rounded-2xl 
-//                    shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 text-center"
-//       >
-//         <img
-//           src={obj.image}
-//           alt=""
-//           className="w-full h-56 object-contain rounded-xl mb-3"
-//         />
-//         <h3 className="text-base font-medium text-gray-700 mb-1 truncate">
-//           {obj.title}
-//         </h3>
-//         <p className="text-lg font-semibold text-emerald-600">
-//           ${obj.price}
-//         </p>
-//       </div>
-//     </Link>
-//   );
-// })}
-
-//   </div>
-// </div>
-
-
-//             </main>
-//         </>
-//     )
-// }

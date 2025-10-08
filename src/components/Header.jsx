@@ -14,7 +14,7 @@ function Header() {
 
     return (
         <>
-            <header className='flex items-center justify-between p-4 bg-amber-700 text-xl text-white w-full'>
+            <header className='flex items-center justify-between p-4 bg-amber-600 text-xl text-white w-full'>
                 <div className="logo">Logo</div>
                 <div className="leftside flex items-center justify-between w-1/2">
                     <div className="menus w-2/3">
@@ -24,7 +24,7 @@ function Header() {
                                 className={({ isActive }) =>
                                     isActive
                                         ? "text-amber-500 font-semibold border-b-2 border-amber-600 pb-1"
-                                        : "text-gray-700 hover:text-amber-500 transition"
+                                        : "text-white hover:text-amber-500 transition"
                                 }
                             >
                                 Home
@@ -37,7 +37,7 @@ function Header() {
                                     className={({ isActive }) =>
                                         isActive
                                             ? "text-amber-500 font-semibold border-b-2 border-amber-600 pb-1"
-                                        : "text-gray-700 hover:text-amber-500 transition"
+                                        : "text-white hover:text-amber-500 transition"
                                     }
                                 >
                                     About
@@ -50,7 +50,7 @@ function Header() {
                                     className={({ isActive }) =>
                                         isActive
                                            ? "text-amber-500 font-semibold border-b-2 border-amber-600 pb-1"
-                                        : "text-gray-700 hover:text-amber-500 transition"
+                                        : "text-white hover:text-amber-500 transition"
                                     }
                                 >
                                     Contact
