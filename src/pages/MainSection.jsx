@@ -1,13 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";  // ✅ correct import
 import axios from "axios";
 import { Link } from "react-router-dom";
+
 
 export default function MainSection() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currency, setCurrency] = useState(localStorage.getItem("currency") || "inr"); // ✅
+  
 
   useEffect(() => {
     fetchProducts();
+  }, []);
+
+  //  Listen for currency change event from Header
+  useEffect(() => {
+    const handleChange = () => setCurrency(localStorage.getItem("currency") || "inr");
+    window.addEventListener("currencyChange", handleChange);
+    return () => window.removeEventListener("currencyChange", handleChange);
   }, []);
 
   async function fetchProducts() {
@@ -45,7 +55,7 @@ export default function MainSection() {
         <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {products.map((obj) => (
             <Link to={"/product/" + obj.id} key={obj.id}>
-              <div className= "h-full bg-white p-6 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center">
+              <div className="h-full bg-white p-6 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center">
                 <img
                   src={obj.image}
                   alt={obj.title}
@@ -54,8 +64,12 @@ export default function MainSection() {
                 <h3 className="text-base font-medium text-gray-700 mb-2 text-center line-clamp-2">
                   {obj.title}
                 </h3>
+
+                {/* ✅ Show price according to selected currency */}
                 <p className="text-lg font-semibold text-amber-500">
-                  ₹{obj.priceINR}
+                  {currency === "inr"
+                    ? `₹${obj.priceINR}`
+                    : `$${obj.price}`}
                 </p>
               </div>
             </Link>
@@ -65,3 +79,4 @@ export default function MainSection() {
     </main>
   );
 }
+

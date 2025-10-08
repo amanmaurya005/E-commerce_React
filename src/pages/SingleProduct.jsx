@@ -7,13 +7,20 @@ export default function SingleProduct() {
   const [product, setProduct] = useState(null);
   const [notFound, setNotFound] = useState(false);
   const [convertedPrice, setConvertedPrice] = useState(null);
+  const [currency, setCurrency] = useState(localStorage.getItem("currency") || "inr"); 
 
   useEffect(() => {
     fetchProduct();
   }, [id]);
 
+  //  Listen for currency change event
+  useEffect(() => {
+    const handleChange = () => setCurrency(localStorage.getItem("currency") || "inr");
+    window.addEventListener("currencyChange", handleChange);
+    return () => window.removeEventListener("currencyChange", handleChange);
+  }, []);
+
   async function fetchProduct() {
-    // Fetch product details
     const response = await axios.get(
       "https://fakestoreapi.com/products/" + id
     );
@@ -26,10 +33,7 @@ export default function SingleProduct() {
       const conversion = await axios.get(
         "https://api.exchangerate.host/latest?base=USD&symbols=INR"
       );
-
-      const rate = conversion.data?.rates?.INR || 88; // fallback rate
-      console.log("USD → INR rate:", rate);
-
+      const rate = conversion.data?.rates?.INR || 88;
       setConvertedPrice((response.data.price * rate).toFixed(2));
     } else {
       setNotFound(true);
@@ -55,7 +59,6 @@ export default function SingleProduct() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 py-16 px-6">
       <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
-      
         <div className="flex items-center justify-center bg-gray-50 p-10">
           <img
             src={product.image}
@@ -64,7 +67,6 @@ export default function SingleProduct() {
           />
         </div>
 
-        
         <div className="p-10 flex flex-col justify-center">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
             {product.title}
@@ -72,20 +74,20 @@ export default function SingleProduct() {
 
           
           <p className="text-amber-600 text-2xl font-semibold mb-6">
-            {convertedPrice ? "₹" + convertedPrice :  "$" + product.price}
+            {currency === "inr"
+           ? "₹" + convertedPrice
+           : "$" + product.price}
+
           </p>
 
-         
           <p className="text-gray-700 leading-relaxed mb-8">
             {product.description}
           </p>
 
-          
           <span className="inline-block bg-emerald-100 text-amber-700 px-4 py-1 rounded-full text-sm font-medium mb-6 capitalize">
             {product.category}
           </span>
 
-          
           <div className="flex flex-wrap items-center gap-4">
             <Link
               to="/"
