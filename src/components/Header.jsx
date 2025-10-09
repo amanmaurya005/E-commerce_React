@@ -1,16 +1,13 @@
 import React, { useState } from 'react'
 import { FaShoppingCart } from "react-icons/fa";
 import { FiLogIn } from "react-icons/fi";
-import { NavLink } from "react-router-dom";
+import { NavLink,Link } from "react-router-dom";
 
 function Header() {
 
-    const [cart, setCart] = useState([]);
     const [currency, setCurrency] = useState(localStorage.getItem("currency") || "inr"); // added
 
-    function cartAdd() {
-        setCart([{}])
-    }
+   
 
     //  handle currency selection
     function handleCurrencyChange(e) {
@@ -20,7 +17,7 @@ function Header() {
         window.dispatchEvent(new Event("currencyChange")); // notify all components
     }
 
-    console.log(cart);
+
 
     return (
         <>
@@ -33,7 +30,7 @@ function Header() {
 
                              {/*  currency selector  */}
                             <select
-                                className='outline-none border rounded text-black px-2 py-1'
+                                className='outline-none  text-white px-2 py-1'
                                 name="Select"
                                 id=""
                                 value={currency}
@@ -86,9 +83,10 @@ function Header() {
 
                     <div className="info w-1/6">
                         <ul className='flex items-center justify-around'>
-                            <li onClick={cartAdd}>
-                                <a href=""><FaShoppingCart /></a>
+                           <Link to="AddToCart"> <li>
+                                <FaShoppingCart />
                             </li>
+                            </Link>
                             <li>
                                 <a href=""><FiLogIn /></a>
                             </li>

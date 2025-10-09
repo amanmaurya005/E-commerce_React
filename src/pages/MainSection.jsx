@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";  // ✅ correct import
+import React, { useEffect, useState } from "react";  
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function MainSection() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currency, setCurrency] = useState(localStorage.getItem("currency") || "inr"); // ✅
+  const [currency, setCurrency] = useState(localStorage.getItem("currency") || "inr"); 
   
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function MainSection() {
 
   if (loading) {
     return (
-      <div className="text-center p-10 text-xl font-semibold text-gray-500">
+      <div className="text-center min-h-screen p-10 text-xl font-semibold text-gray-500">
         Loading products...
       </div>
     );
@@ -65,12 +65,13 @@ export default function MainSection() {
                   {obj.title}
                 </h3>
 
-                {/* ✅ Show price according to selected currency */}
+                {/* Show price according to selected currency */}
                 <p className="text-lg font-semibold text-amber-500">
                   {currency === "inr"
-                    ? `₹${obj.priceINR}`
-                    : `$${obj.price}`}
+                    ? "₹" + obj.priceINR
+           : "$" + obj.price}
                 </p>
+               
               </div>
             </Link>
           ))}

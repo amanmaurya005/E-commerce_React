@@ -6,6 +6,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import Aman from './components/Aman'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import AddToCart from './pages/AddToCart'
 import FoundNot from "./pages/FoundNot"
 import SingleProduct from "./pages/SingleProduct"
 
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
             {
                 path:"product/:id",
                 element: <SingleProduct />
+            },
+             {
+                path: "AddToCart",
+                element: <AddToCart />
             },
              {
                 path: "*",
