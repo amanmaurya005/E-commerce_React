@@ -8,7 +8,7 @@ export default function SingleProduct() {
   const [notFound, setNotFound] = useState(false);
   const [convertedPrice, setConvertedPrice] = useState(null);
   const [currency, setCurrency] = useState(localStorage.getItem("currency") || "inr");
-  const [quantity, setQuantity] = useState(1); // ✅ quantity state
+  const [quantity, setQuantity] = useState(1); // quantity state
 
   useEffect(() => {
     fetchProduct();
@@ -36,7 +36,7 @@ export default function SingleProduct() {
     }
   }
 
-  // ✅ Add to Cart with Quantity
+  //  Add to Cart with Quantity
   function addToCart() {
     const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -110,7 +110,7 @@ export default function SingleProduct() {
             {product.category}
           </span>
 
-          {/* ✅ Quantity Selector */}
+          {/*  Quantity Selector */}
           <div className="flex items-center gap-4 mb-6">
             <button
               onClick={decrease}
