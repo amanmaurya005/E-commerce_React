@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { FaShoppingCart } from "react-icons/fa";
 import { FiLogIn } from "react-icons/fi";
-import { NavLink,Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 function Header() {
 
     const [currency, setCurrency] = useState(localStorage.getItem("currency") || "inr"); // added
 
-   
+
 
     //  handle currency selection
     function handleCurrencyChange(e) {
@@ -28,16 +28,15 @@ function Header() {
                     <div className="menus w-2/3">
                         <ul className='flex items-center justify-around w-full'>
 
-                             {/*  currency selector  */}
+                            {/*  currency selector  */}
                             <select
-                                className='outline-none  text-white px-2 py-1'
+                                className="bg-amber-500/30 border border-white/30 text-white px-3 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50 hover:bg-amber-500/50 transition duration-200 cursor-pointer"
                                 name="Select"
-                                id=""
                                 value={currency}
-                                onChange={handleCurrencyChange} // added
+                                onChange={handleCurrencyChange}
                             >
-                                <option className='text-black' value="inr">INR</option>
-                                <option className='text-black' value="usd">USD</option>
+                                <option className="text-black" value="inr">INR ₹</option>
+                                <option className="text-black" value="usd">USD $</option>
                             </select>
 
                             <li>
@@ -83,7 +82,7 @@ function Header() {
 
                     <div className="info w-1/6">
                         <ul className='flex items-center justify-around'>
-                           <Link to="AddToCart"> <li>
+                            <Link to="AddToCart"> <li>
                                 <FaShoppingCart />
                             </li>
                             </Link>
